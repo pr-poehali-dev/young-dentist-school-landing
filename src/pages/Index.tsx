@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import Icon from "@/components/ui/icon";
 
-const HERO_IMG = "https://cdn.poehali.dev/projects/245f39e3-e300-46e4-ac41-b9b2c7489ad6/files/8d63030c-d47f-4677-93ca-1af04033c864.jpg";
-const OUTDOOR_IMG = "https://cdn.poehali.dev/projects/245f39e3-e300-46e4-ac41-b9b2c7489ad6/files/13d91f22-49b1-42d6-aeb6-e1214b88216b.jpg";
-const MOM_IMG = "https://cdn.poehali.dev/projects/245f39e3-e300-46e4-ac41-b9b2c7489ad6/files/ba681532-695b-4168-8d11-2c1c444cbae4.jpg";
+const HERO_IMG = "https://cdn.poehali.dev/projects/245f39e3-e300-46e4-ac41-b9b2c7489ad6/files/49b78c8e-531d-49d1-9b7b-6ddfc17643eb.jpg";
+const LEARN_IMG = "https://cdn.poehali.dev/projects/245f39e3-e300-46e4-ac41-b9b2c7489ad6/files/0cf1f7c5-9c1e-4375-a704-48fcf2f0afbf.jpg";
+const CERT_IMG = "https://cdn.poehali.dev/projects/245f39e3-e300-46e4-ac41-b9b2c7489ad6/files/8c2192f9-e29f-403c-8cf2-ece5e2bd2bba.jpg";
 
 function useInView(threshold = 0.15) {
   const ref = useRef<HTMLDivElement>(null);
@@ -11,83 +11,82 @@ function useInView(threshold = 0.15) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setInView(true); }, { threshold });
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) setInView(true); },
+      { threshold }
+    );
     obs.observe(el);
     return () => obs.disconnect();
   }, [threshold]);
   return { ref, inView };
 }
 
-const features = [
-  { icon: "Sun", title: "Уютная атмосфера", text: "Небольшие группы по 8–10 детей. Каждый ребёнок — в центре внимания." },
-  { icon: "BookOpen", title: "Развивающие занятия", text: "Монтессори-материалы, творчество, музыка и ранняя подготовка к школе." },
-  { icon: "Shield", title: "Безопасность", text: "Видеонаблюдение, закрытая территория, охрана. Родители спокойны." },
-  { icon: "Leaf", title: "Правильное питание", text: "Домашняя кухня, пятиразовое питание без консервантов и красителей." },
-  { icon: "Heart", title: "Любящие педагоги", text: "Опытные воспитатели с психологическим образованием и любовью к детям." },
-  { icon: "Clock", title: "Гибкий режим", text: "Работаем с 7:30 до 20:00. Есть группы полного и неполного дня." },
+const program = [
+  { step: "01", emoji: "🦷", title: "Знакомство с зубами", text: "Изучаем строение зуба на большой модели. Узнаём, почему молочные зубы важны." },
+  { step: "02", emoji: "🔬", title: "Микробы под микроскопом", text: "Смотрим на налёт через настоящий детский микроскоп. Вот почему нужно чистить!" },
+  { step: "03", emoji: "🩺", title: "Примерка инструментов", text: "Надеваем халат, перчатки, маску. Пробуем настоящие (безопасные) инструменты." },
+  { step: "04", emoji: "🦷", title: "Практика чистки", text: "Чистим зубы манекену правильной техникой — 2 минуты по всем правилам." },
+  { step: "05", emoji: "🎨", title: "Ставим пломбу", text: "Лепим пломбу из специального материала. Настоящая работа стоматолога!" },
+  { step: "06", emoji: "🎓", title: "Диплом и подарок", text: "Вручаем диплом «Юного стоматолога» и набор для правильного ухода за зубами." },
 ];
 
-const schedule = [
-  { time: "7:30–8:30", label: "Приём детей", emoji: "🌅" },
-  { time: "8:30–9:00", label: "Зарядка и завтрак", emoji: "🥣" },
-  { time: "9:00–11:00", label: "Развивающие занятия", emoji: "🎨" },
-  { time: "11:00–12:00", label: "Прогулка", emoji: "🌳" },
-  { time: "12:00–13:00", label: "Обед", emoji: "🍲" },
-  { time: "13:00–15:30", label: "Тихий час", emoji: "😴" },
-  { time: "15:30–16:00", label: "Полдник", emoji: "🍓" },
-  { time: "16:00–18:00", label: "Игры и творчество", emoji: "🧩" },
-  { time: "18:00–20:00", label: "Вечерняя прогулка и уход", emoji: "🌙" },
+const facts = [
+  { num: "2,5", unit: "часа", label: "длительность мастер-класса" },
+  { num: "5–12", unit: "лет", label: "возраст участников" },
+  { num: "8", unit: "детей", label: "максимум в группе" },
+  { num: "100%", unit: "", label: "безопасно и весело" },
 ];
 
 const reviews = [
   {
-    name: "Анна М.",
-    child: "мама Саши, 4 года",
-    text: "Очень боялась отдавать сына в сад, но здесь всё иначе. Каждое утро он бежит туда сам! Воспитатели просто золото.",
-    avatar: "👩‍👦",
+    name: "Светлана О.",
+    about: "мама Пети, 7 лет",
+    text: "Сын пришёл домой и немедленно почистил зубы — сам! Без напоминаний. До этого было невозможно. Спасибо огромное!",
+    emoji: "👩",
     video: true,
-    duration: "1:24",
+    duration: "1:32",
   },
   {
-    name: "Дмитрий и Ольга",
-    child: "родители Маши, 3 года",
-    text: "Дочка расцвела буквально за месяц. Стала говорить, рисовать, петь. Рекомендуем всем знакомым!",
-    avatar: "👨‍👩‍👧",
+    name: "Артём и Ксения",
+    about: "родители Даши, 9 лет",
+    text: "Дочка теперь знает про зубы больше меня. Объясняет всем в семье, как правильно чистить. Потрясающий формат!",
+    emoji: "👨‍👩‍👧",
     video: true,
-    duration: "2:08",
+    duration: "2:14",
   },
   {
-    name: "Елена К.",
-    child: "мама Тимура, 5 лет",
-    text: "Ходим уже два года. Готовят к школе на высшем уровне. Ребёнок знает буквы, счёт, рисует и занимается логикой.",
-    avatar: "👩‍👶",
+    name: "Марина В.",
+    about: "мама Коли, 6 лет",
+    text: "Боялись, что будет страшно — всё наоборот. Коля теперь хочет стать стоматологом. Ходим уже второй раз!",
+    emoji: "👩‍👦",
     video: true,
-    duration: "1:47",
+    duration: "1:55",
   },
 ];
 
 const faqs = [
-  { q: "С какого возраста принимаете детей?", a: "Принимаем малышей с 1 года 6 месяцев. Есть ясельная и дошкольная группы." },
-  { q: "Сколько стоит посещение?", a: "Стоимость зависит от выбранной группы и режима. Уточните по телефону — подберём подходящий вариант." },
-  { q: "Как проходит адаптация?", a: "Первые дни мама может присутствовать рядом. Адаптируем постепенно — по 2–3 часа с увеличением." },
-  { q: "Есть ли место в группе прямо сейчас?", a: "Места заканчиваются быстро. Запишитесь на экскурсию — уточним актуальный список." },
+  { q: "Подходит ли детям, которые боятся стоматолога?", a: "Это один из главных эффектов! Когда ребёнок видит инструменты в игровой обстановке и сам их держит — страх уходит. 9 из 10 детей после мастер-класса спокойно ходят к врачу." },
+  { q: "Какой возраст подходит?", a: "Принимаем детей от 5 до 12 лет. Для малышей 5–6 лет программа немного адаптируется." },
+  { q: "Могут ли родители присутствовать?", a: "Да! Родители сидят рядом и могут снимать видео. Многие говорят, что сами узнали много нового." },
+  { q: "Что нужно взять с собой?", a: "Ничего — всё включено. Халатики, перчатки, дипломы и подарочный набор. Просто приходите!" },
+  { q: "Проводите ли корпоративы и дни рождения?", a: "Конечно! Можно арендовать мастер-класс для группы от 5 человек — день рождения, праздник, событие в школе." },
 ];
 
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
     <div
-      className={`rounded-2xl border transition-all duration-300 cursor-pointer overflow-hidden ${open ? "border-[#F4A97F] bg-[#FFF8F4]" : "border-[#F0E8E0] bg-white hover:border-[#F4A97F]"}`}
+      className={`rounded-2xl border transition-all duration-300 cursor-pointer overflow-hidden ${open ? "border-[#7CC8C0] bg-[#F4FFFE]" : "border-[#E0F0EE] bg-white hover:border-[#7CC8C0]"}`}
       onClick={() => setOpen(!open)}
     >
       <div className="flex items-center justify-between p-5 gap-4">
-        <span className="font-nunito font-700 text-[#3D2C20] text-base">{q}</span>
-        <span className={`transition-transform duration-300 text-[#F4A97F] flex-shrink-0 ${open ? "rotate-45" : ""}`}>
+        <span className="font-nunito font-bold text-[#1A3A36] text-base">{q}</span>
+        <span className={`transition-transform duration-300 text-[#7CC8C0] flex-shrink-0 ${open ? "rotate-45" : ""}`}>
           <Icon name="Plus" size={20} />
         </span>
       </div>
       {open && (
-        <div className="px-5 pb-5 font-nunito text-[#7A6458] text-sm leading-relaxed animate-fade-in">
+        <div className="px-5 pb-5 font-nunito text-[#4A7A74] text-sm leading-relaxed">
           {a}
         </div>
       )}
@@ -95,44 +94,40 @@ function FaqItem({ q, a }: { q: string; a: string }) {
   );
 }
 
-function VideoReviewCard({ review, index }: { review: typeof reviews[0]; index: number }) {
+function VideoCard({ review, index }: { review: typeof reviews[0]; index: number }) {
   const [playing, setPlaying] = useState(false);
   return (
-    <div
-      className="rounded-3xl bg-white border border-[#F0E8E0] overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
-      style={{ animationDelay: `${index * 0.15}s` }}
-    >
-      <div className="relative aspect-video bg-gradient-to-br from-[#FFE8D6] to-[#F4C8A4] flex items-center justify-center">
+    <div className="rounded-3xl bg-white border border-[#E0F0EE] overflow-hidden shadow-sm hover:shadow-lg hover:shadow-[#7CC8C0]/15 transition-all duration-300">
+      <div
+        className="relative aspect-video flex items-center justify-center cursor-pointer"
+        style={{ background: `linear-gradient(135deg, #D4F0EC ${index * 20}%, #B8E8E4)` }}
+        onClick={() => setPlaying(!playing)}
+      >
         {!playing ? (
           <>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-7xl opacity-20">{review.avatar}</span>
+            <span className="text-8xl opacity-20 absolute">{review.emoji}</span>
+            <div className="relative z-10 flex flex-col items-center gap-3">
+              <div className="w-16 h-16 rounded-full bg-white/95 flex items-center justify-center shadow-xl hover:scale-110 transition-transform">
+                <Icon name="Play" size={26} className="text-[#3DADA3] ml-1" />
+              </div>
+              <span className="text-[#1A3A36]/60 text-xs font-semibold bg-white/80 px-3 py-1 rounded-full">видеоотзыв · {review.duration}</span>
             </div>
-            <button
-              onClick={() => setPlaying(true)}
-              className="relative z-10 w-16 h-16 rounded-full bg-white/90 backdrop-blur flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-200"
-            >
-              <Icon name="Play" size={24} className="text-[#F4A97F] ml-1" />
-            </button>
-            <span className="absolute bottom-3 right-4 text-xs font-nunito font-600 text-[#3D2C20]/70 bg-white/80 px-2 py-0.5 rounded-full">
-              {review.duration}
-            </span>
           </>
         ) : (
-          <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#3D2C20]/80">
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#1A3A36]/80">
             <span className="text-white font-nunito text-sm">Видеоотзыв родителей</span>
-            <span className="text-white/60 font-nunito text-xs mt-1">(подключите настоящее видео)</span>
-            <button onClick={() => setPlaying(false)} className="mt-3 text-white/80 text-xs underline">← Назад</button>
+            <span className="text-white/50 text-xs mt-1">(подключите настоящее видео)</span>
+            <button onClick={() => setPlaying(false)} className="mt-3 text-white/70 text-xs underline">← Назад</button>
           </div>
         )}
       </div>
       <div className="p-5">
-        <p className="font-nunito text-[#3D2C20] text-sm leading-relaxed mb-4">«{review.text}»</p>
+        <p className="font-nunito text-[#1A3A36] text-sm leading-relaxed mb-4">«{review.text}»</p>
         <div className="flex items-center gap-3">
-          <span className="text-2xl">{review.avatar}</span>
+          <span className="text-2xl">{review.emoji}</span>
           <div>
-            <div className="font-nunito font-700 text-[#3D2C20] text-sm">{review.name}</div>
-            <div className="font-nunito text-[#B09080] text-xs">{review.child}</div>
+            <div className="font-nunito font-bold text-[#1A3A36] text-sm">{review.name}</div>
+            <div className="text-[#7CC8C0] text-xs">{review.about}</div>
           </div>
         </div>
       </div>
@@ -141,30 +136,32 @@ function VideoReviewCard({ review, index }: { review: typeof reviews[0]; index: 
 }
 
 export default function Index() {
-  const featuresSection = useInView();
-  const scheduleSection = useInView();
+  const programSection = useInView();
   const reviewsSection = useInView();
   const faqSection = useInView();
-  const [formData, setFormData] = useState({ name: "", phone: "", age: "" });
+  const factsSection = useInView();
+  const [formData, setFormData] = useState({ name: "", phone: "", age: "", comment: "" });
   const [submitted, setSubmitted] = useState(false);
 
   return (
-    <div className="font-nunito bg-[#FFFAF7] text-[#3D2C20] min-h-screen overflow-x-hidden">
+    <div className="font-nunito bg-[#F7FFFE] text-[#1A3A36] min-h-screen overflow-x-hidden">
 
       {/* NAV */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#FFFAF7]/90 backdrop-blur-md border-b border-[#F0E8E0]">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#F7FFFE]/95 backdrop-blur-md border-b border-[#E0F0EE]">
         <div className="max-w-6xl mx-auto px-5 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-2xl">☀️</span>
-            <span className="font-nunito font-800 text-[#3D2C20] text-lg">Солнышко</span>
+          <div className="flex items-center gap-2.5">
+            <span className="text-2xl">🦷</span>
+            <div>
+              <div className="font-extrabold text-[#1A3A36] text-base leading-tight">Школа юного</div>
+              <div className="font-extrabold text-[#3DADA3] text-base leading-tight">стоматолога</div>
+            </div>
           </div>
-          <div className="hidden md:flex items-center gap-7 text-sm font-600 text-[#7A6458]">
-            <a href="#about" className="hover:text-[#F4A97F] transition-colors">О нас</a>
-            <a href="#program" className="hover:text-[#F4A97F] transition-colors">Программа</a>
-            <a href="#reviews" className="hover:text-[#F4A97F] transition-colors">Отзывы</a>
-            <a href="#contact" className="hover:text-[#F4A97F] transition-colors">Контакты</a>
+          <div className="hidden md:flex items-center gap-7 text-sm font-semibold text-[#4A7A74]">
+            <a href="#program" className="hover:text-[#3DADA3] transition-colors">Программа</a>
+            <a href="#reviews" className="hover:text-[#3DADA3] transition-colors">Отзывы</a>
+            <a href="#faq" className="hover:text-[#3DADA3] transition-colors">Вопросы</a>
           </div>
-          <a href="#contact" className="bg-[#F4A97F] text-white font-nunito font-700 text-sm px-5 py-2.5 rounded-full hover:bg-[#E8956A] transition-colors">
+          <a href="#contact" className="bg-[#3DADA3] text-white font-bold text-sm px-5 py-2.5 rounded-full hover:bg-[#2D9D93] transition-all hover:scale-105 shadow-lg shadow-[#3DADA3]/30">
             Записаться
           </a>
         </div>
@@ -172,115 +169,125 @@ export default function Index() {
 
       {/* HERO */}
       <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-20 right-0 w-[55%] h-full">
-            <img src={HERO_IMG} alt="Дети в саду" className="w-full h-full object-cover rounded-bl-[80px]" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#FFFAF7] via-[#FFFAF7]/40 to-transparent rounded-bl-[80px]" />
-          </div>
-          <div className="absolute bottom-10 left-10 w-24 h-24 rounded-full bg-[#FFE4D0]/60 animate-float" />
-          <div className="absolute top-32 left-[30%] w-16 h-16 rounded-full bg-[#D4EAD4]/60 animate-float" style={{ animationDelay: "2s" }} />
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute -top-20 -right-20 w-[600px] h-[600px] rounded-full bg-[#C8F0EC]/40" />
+          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-[#D4F5E0]/30" />
+          <div className="absolute top-1/2 right-[5%] w-10 h-10 rounded-full bg-[#FFE8A0]/80 animate-[float_5s_ease-in-out_infinite]" />
+          <div className="absolute top-1/3 left-[8%] w-7 h-7 rounded-full bg-[#FFCCD0]/80 animate-[float_7s_ease-in-out_infinite_1s]" />
         </div>
 
         <div className="relative max-w-6xl mx-auto px-5 py-20 grid md:grid-cols-2 gap-12 items-center">
-          <div className="animate-fade-in-up">
-            <div className="inline-flex items-center gap-2 bg-[#FFE8D6] text-[#C47840] text-sm font-600 px-4 py-2 rounded-full mb-6">
-              <Icon name="MapPin" size={14} />
-              Москва, ул. Садовая, 12
+          <div style={{ animation: "fadeInUp 0.9s ease-out forwards" }}>
+            <div className="inline-flex items-center gap-2 bg-[#D4F5E8] text-[#2A8A80] text-sm font-bold px-4 py-2 rounded-full mb-6">
+              <span>🎓</span>
+              Для детей 5–12 лет · Москва
             </div>
-            <h1 className="font-cormorant font-600 text-5xl md:text-6xl leading-tight text-[#3D2C20] mb-6">
-              Место, где дети<br />
-              <em className="text-[#F4A97F] not-italic">расцветают</em> каждый день
+            <h1 className="font-cormorant font-semibold text-5xl md:text-6xl leading-tight text-[#1A3A36] mb-6">
+              Мастер-класс,<br />
+              после которого<br />
+              <em className="text-[#3DADA3] not-italic">зубы чистят сами</em>
             </h1>
-            <p className="text-[#7A6458] text-lg leading-relaxed mb-8 max-w-md">
-              Частный детский сад для детей от 1,5 до 7 лет. Небольшие группы, любящие педагоги и атмосфера настоящего дома.
+            <p className="text-[#4A7A74] text-lg leading-relaxed mb-8 max-w-md">
+              2,5 часа в роли настоящего стоматолога. Ребёнок примеряет халат, работает с инструментами и получает диплом. Страх перед врачом — уходит навсегда.
             </p>
             <div className="flex flex-wrap gap-4">
-              <a href="#contact" className="bg-[#F4A97F] text-white font-700 px-7 py-3.5 rounded-full hover:bg-[#E8956A] transition-all hover:scale-105 shadow-lg shadow-[#F4A97F]/30">
-                Записаться на экскурсию
+              <a href="#contact" className="bg-[#3DADA3] text-white font-extrabold px-7 py-4 rounded-full hover:bg-[#2D9D93] transition-all hover:scale-105 shadow-xl shadow-[#3DADA3]/30 text-base">
+                Записаться на мастер-класс
               </a>
-              <a href="#about" className="border-2 border-[#F0E8E0] text-[#7A6458] font-600 px-7 py-3.5 rounded-full hover:border-[#F4A97F] hover:text-[#F4A97F] transition-colors">
-                Узнать больше
+              <a href="#program" className="border-2 border-[#B8E8E4] text-[#4A7A74] font-semibold px-7 py-4 rounded-full hover:border-[#3DADA3] hover:text-[#3DADA3] transition-colors">
+                Смотреть программу
               </a>
             </div>
-            <div className="flex items-center gap-8 mt-10">
-              {[["8+", "лет работы"], ["200+", "выпускников"], ["96%", "довольных семей"]].map(([n, l]) => (
-                <div key={l}>
-                  <div className="font-cormorant font-600 text-3xl text-[#F4A97F]">{n}</div>
-                  <div className="text-xs text-[#B09080] font-500">{l}</div>
+            <div className="flex items-center gap-2 mt-6 text-sm text-[#4A7A74]">
+              <Icon name="CalendarDays" size={15} className="text-[#3DADA3]" />
+              <span>Ближайший: <strong className="text-[#1A3A36]">19 апреля, суббота, 11:00</strong></span>
+            </div>
+          </div>
+
+          <div className="relative" style={{ animation: "fadeInUp 0.9s ease-out 0.2s both" }}>
+            <div className="absolute -top-4 -right-4 w-full h-full rounded-3xl bg-[#B8E8E4]/50" />
+            <img
+              src={HERO_IMG}
+              alt="Дети на мастер-классе"
+              className="relative rounded-3xl w-full object-cover h-96 shadow-2xl shadow-[#3DADA3]/20"
+            />
+            <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl p-4 shadow-lg border border-[#E0F0EE]">
+              <div className="flex items-center gap-3">
+                <span className="text-3xl">🏆</span>
+                <div>
+                  <div className="font-extrabold text-[#1A3A36] text-sm">Сертификат</div>
+                  <div className="text-[#7CC8C0] text-xs">Юный стоматолог</div>
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ABOUT */}
-      <section id="about" ref={featuresSection.ref} className="py-24 bg-white">
-        <div className="max-w-6xl mx-auto px-5">
-          <div className={`text-center mb-16 transition-all duration-700 ${featuresSection.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <span className="text-sm font-600 text-[#F4A97F] uppercase tracking-widest">О формате</span>
-            <h2 className="font-cormorant font-600 text-4xl md:text-5xl text-[#3D2C20] mt-3 mb-4">Почему выбирают нас</h2>
-            <p className="text-[#7A6458] max-w-lg mx-auto">Мы создали пространство, в котором каждый ребёнок чувствует себя любимым и важным</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {features.map((f, i) => (
+      {/* STATS */}
+      <section ref={factsSection.ref} className="py-16 bg-[#1A3A36]">
+        <div className="max-w-5xl mx-auto px-5">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {facts.map((f, i) => (
               <div
-                key={f.title}
-                className={`bg-[#FFFAF7] rounded-3xl p-7 border border-[#F0E8E0] hover:border-[#F4A97F] hover:shadow-lg hover:shadow-[#F4A97F]/10 transition-all duration-500 group ${featuresSection.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                key={f.label}
+                className={`text-center transition-all duration-700 ${factsSection.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
                 style={{ transitionDelay: `${i * 0.1}s` }}
               >
-                <div className="w-12 h-12 rounded-2xl bg-[#FFE8D6] flex items-center justify-center mb-4 group-hover:bg-[#F4A97F] transition-colors">
-                  <Icon name={f.icon as any} size={22} className="text-[#F4A97F] group-hover:text-white transition-colors" />
+                <div className="font-cormorant font-semibold text-4xl text-[#7CC8C0]">
+                  {f.num}<span className="text-2xl text-[#3DADA3] ml-1">{f.unit}</span>
                 </div>
-                <h3 className="font-700 text-[#3D2C20] text-lg mb-2">{f.title}</h3>
-                <p className="text-[#7A6458] text-sm leading-relaxed">{f.text}</p>
+                <div className="text-white/60 text-sm mt-1">{f.label}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* PROGRAM / SCHEDULE */}
-      <section id="program" ref={scheduleSection.ref} className="py-24 bg-[#FFFAF7]">
+      {/* PROGRAM */}
+      <section id="program" ref={programSection.ref} className="py-24 bg-white">
         <div className="max-w-6xl mx-auto px-5">
-          <div className={`grid md:grid-cols-2 gap-16 items-center transition-all duration-700 ${scheduleSection.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <div>
-              <span className="text-sm font-600 text-[#F4A97F] uppercase tracking-widest">Программа</span>
-              <h2 className="font-cormorant font-600 text-4xl md:text-5xl text-[#3D2C20] mt-3 mb-6">
-                День, наполненный<br />смыслом
-              </h2>
-              <p className="text-[#7A6458] leading-relaxed mb-8">
-                Каждый день в «Солнышко» — это баланс учёбы, игры, отдыха и творчества. Мы следуем мягкому режиму, который уважает природные ритмы ребёнка.
-              </p>
-              <img src={OUTDOOR_IMG} alt="Прогулка" className="rounded-3xl w-full object-cover h-56 shadow-md" />
-            </div>
-            <div className="space-y-2">
-              {schedule.map((item, i) => (
-                <div
-                  key={item.time}
-                  className={`flex items-center gap-4 p-4 rounded-2xl transition-all duration-500 hover:bg-white hover:shadow-sm ${scheduleSection.inView ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"}`}
-                  style={{ transitionDelay: `${i * 0.07}s` }}
-                >
-                  <span className="text-2xl w-8 flex-shrink-0">{item.emoji}</span>
-                  <div className="flex-1 flex items-center justify-between gap-4">
-                    <span className="text-[#3D2C20] font-600 text-sm">{item.label}</span>
-                    <span className="text-[#B09080] text-xs font-500 whitespace-nowrap">{item.time}</span>
+          <div className={`text-center mb-16 transition-all duration-700 ${programSection.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+            <span className="text-sm font-bold text-[#3DADA3] uppercase tracking-widest">Программа</span>
+            <h2 className="font-cormorant font-semibold text-4xl md:text-5xl text-[#1A3A36] mt-3 mb-4">Что происходит на занятии</h2>
+            <p className="text-[#4A7A74] max-w-lg mx-auto">6 шагов от «боюсь стоматолога» до «хочу им стать»</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-5">
+            {program.map((step, i) => (
+              <div
+                key={step.step}
+                className={`flex gap-5 p-6 rounded-3xl bg-[#F7FFFE] border border-[#E0F0EE] hover:border-[#7CC8C0] hover:shadow-md transition-all duration-500 ${programSection.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                style={{ transitionDelay: `${i * 0.1}s` }}
+              >
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-[#D4F5EC] flex items-center justify-center text-2xl">
+                    {step.emoji}
                   </div>
                 </div>
-              ))}
-            </div>
+                <div>
+                  <div className="text-xs font-bold text-[#7CC8C0] mb-1">Шаг {step.step}</div>
+                  <h3 className="font-bold text-[#1A3A36] text-base mb-1.5">{step.title}</h3>
+                  <p className="text-[#4A7A74] text-sm leading-relaxed">{step.text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className={`mt-12 grid md:grid-cols-2 gap-8 items-center transition-all duration-700 delay-500 ${programSection.inView ? "opacity-100" : "opacity-0"}`}>
+            <img src={LEARN_IMG} alt="Обучение" className="rounded-3xl object-cover w-full h-64 shadow-lg" />
+            <img src={CERT_IMG} alt="Диплом" className="rounded-3xl object-cover w-full h-64 shadow-lg" />
           </div>
         </div>
       </section>
 
       {/* VIDEO REVIEWS */}
-      <section id="reviews" ref={reviewsSection.ref} className="py-24 bg-white">
+      <section id="reviews" ref={reviewsSection.ref} className="py-24 bg-[#F7FFFE]">
         <div className="max-w-6xl mx-auto px-5">
           <div className={`text-center mb-16 transition-all duration-700 ${reviewsSection.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <span className="text-sm font-600 text-[#F4A97F] uppercase tracking-widest">Отзывы</span>
-            <h2 className="font-cormorant font-600 text-4xl md:text-5xl text-[#3D2C20] mt-3 mb-4">Родители говорят сами</h2>
-            <p className="text-[#7A6458] max-w-md mx-auto">Лучшая оценка нашей работы — искренние слова семей, которым мы доверяем</p>
+            <span className="text-sm font-bold text-[#3DADA3] uppercase tracking-widest">Отзывы</span>
+            <h2 className="font-cormorant font-semibold text-4xl md:text-5xl text-[#1A3A36] mt-3 mb-4">Родители снимают сами</h2>
+            <p className="text-[#4A7A74] max-w-md mx-auto">Смотрите настоящие видеоотзывы — без сценариев и купюр</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
@@ -290,32 +297,27 @@ export default function Index() {
                 className={`transition-all duration-700 ${reviewsSection.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
                 style={{ transitionDelay: `${i * 0.15}s` }}
               >
-                <VideoReviewCard review={r} index={i} />
+                <VideoCard review={r} index={i} />
               </div>
             ))}
           </div>
 
-          <div className={`mt-16 bg-gradient-to-br from-[#FFE8D6] to-[#F4C8A4] rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 transition-all duration-700 delay-500 ${reviewsSection.inView ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
-            <img src={MOM_IMG} alt="Счастливая семья" className="w-40 h-40 rounded-2xl object-cover flex-shrink-0 shadow-md" />
+          <div className={`mt-12 bg-gradient-to-r from-[#1A3A36] to-[#2D6E66] rounded-3xl p-8 md:p-10 flex flex-col md:flex-row items-center gap-8 text-white transition-all duration-700 delay-500 ${reviewsSection.inView ? "opacity-100" : "opacity-0"}`}>
+            <div className="text-7xl">🦷</div>
             <div>
-              <div className="font-cormorant font-600 text-3xl text-[#3D2C20] mb-3 italic">
-                «Здесь мой ребёнок по-настоящему счастлив»
-              </div>
-              <p className="text-[#7A6458] leading-relaxed mb-4">Мы собрали команду педагогов, которые не просто работают с детьми — они их любят. Приходите и почувствуйте атмосферу сами.</p>
-              <a href="#contact" className="inline-flex items-center gap-2 font-700 text-[#C47840] hover:gap-3 transition-all">
-                Записаться на экскурсию <Icon name="ArrowRight" size={16} />
-              </a>
+              <div className="font-cormorant font-semibold text-3xl mb-2 italic">«Теперь чистит зубы без напоминаний»</div>
+              <p className="text-white/70 text-sm leading-relaxed">Это говорят 87% родителей спустя месяц после мастер-класса. Знания, полученные через практику и эмоции, остаются с детьми навсегда.</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* FAQ */}
-      <section ref={faqSection.ref} className="py-24 bg-[#FFFAF7]">
+      <section id="faq" ref={faqSection.ref} className="py-24 bg-white">
         <div className="max-w-3xl mx-auto px-5">
           <div className={`text-center mb-12 transition-all duration-700 ${faqSection.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <span className="text-sm font-600 text-[#F4A97F] uppercase tracking-widest">Вопросы и ответы</span>
-            <h2 className="font-cormorant font-600 text-4xl text-[#3D2C20] mt-3">Часто спрашивают</h2>
+            <span className="text-sm font-bold text-[#3DADA3] uppercase tracking-widest">Вопросы</span>
+            <h2 className="font-cormorant font-semibold text-4xl text-[#1A3A36] mt-3">Часто спрашивают</h2>
           </div>
           <div className={`space-y-3 transition-all duration-700 delay-200 ${faqSection.inView ? "opacity-100" : "opacity-0"}`}>
             {faqs.map((f) => <FaqItem key={f.q} q={f.q} a={f.a} />)}
@@ -323,30 +325,38 @@ export default function Index() {
         </div>
       </section>
 
-      {/* CONTACT FORM */}
-      <section id="contact" className="py-24 bg-white">
+      {/* CONTACT */}
+      <section id="contact" className="py-24 bg-[#F7FFFE]">
         <div className="max-w-5xl mx-auto px-5">
-          <div className="bg-gradient-to-br from-[#3D2C20] to-[#5C4033] rounded-3xl p-10 md:p-16 text-white">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="bg-gradient-to-br from-[#1A3A36] to-[#2A5A54] rounded-3xl p-10 md:p-16 text-white overflow-hidden relative">
+            <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-white/5 -translate-y-1/2 translate-x-1/2" />
+            <div className="relative grid md:grid-cols-2 gap-12 items-start">
               <div>
-                <span className="text-[#F4A97F] text-sm font-600 uppercase tracking-widest">Запись</span>
-                <h2 className="font-cormorant font-600 text-4xl md:text-5xl mt-3 mb-5 leading-tight">
-                  Приходите<br />познакомиться
+                <span className="text-[#7CC8C0] text-sm font-bold uppercase tracking-widest">Запись</span>
+                <h2 className="font-cormorant font-semibold text-4xl md:text-5xl mt-3 mb-5 leading-tight">
+                  Ближайший<br />мастер-класс
                 </h2>
-                <p className="text-white/70 leading-relaxed mb-8">
-                  Запишитесь на бесплатную экскурсию по саду. Вы увидите всё своими глазами и познакомитесь с педагогами.
-                </p>
-                <div className="space-y-4">
-                  {[
-                    { icon: "Phone", text: "+7 (999) 123-45-67" },
-                    { icon: "MapPin", text: "Москва, ул. Садовая, 12" },
-                    { icon: "Clock", text: "Пн–Пт, 7:30–20:00" },
-                  ].map((c) => (
-                    <div key={c.text} className="flex items-center gap-3 text-white/80">
-                      <Icon name={c.icon as any} size={16} className="text-[#F4A97F]" />
-                      <span className="text-sm">{c.text}</span>
-                    </div>
-                  ))}
+                <div className="bg-white/10 rounded-2xl p-5 mb-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <Icon name="CalendarDays" size={18} className="text-[#7CC8C0]" />
+                    <span className="font-bold">19 апреля, суббота</span>
+                  </div>
+                  <div className="flex items-center gap-3 mb-3">
+                    <Icon name="Clock" size={18} className="text-[#7CC8C0]" />
+                    <span>11:00 — 13:30</span>
+                  </div>
+                  <div className="flex items-center gap-3 mb-3">
+                    <Icon name="MapPin" size={18} className="text-[#7CC8C0]" />
+                    <span>Москва, ул. Тверская, 8</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Icon name="Users" size={18} className="text-[#7CC8C0]" />
+                    <span>Осталось <strong className="text-[#7CC8C0]">3 места</strong> из 8</span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 text-white/70 text-sm">
+                  <Icon name="Phone" size={15} className="text-[#7CC8C0]" />
+                  <span>+7 (999) 123-45-67</span>
                 </div>
               </div>
 
@@ -355,7 +365,8 @@ export default function Index() {
                   onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}
                   className="bg-white/10 backdrop-blur rounded-2xl p-7 space-y-4"
                 >
-                  <h3 className="font-700 text-lg mb-2">Оставьте заявку</h3>
+                  <h3 className="font-bold text-xl mb-1">Забронировать место</h3>
+                  <p className="text-white/60 text-sm mb-2">Бесплатно, без предоплаты</p>
                   <div>
                     <label className="text-white/60 text-xs mb-1.5 block">Ваше имя</label>
                     <input
@@ -363,7 +374,7 @@ export default function Index() {
                       placeholder="Мария"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/30 text-sm focus:outline-none focus:border-[#F4A97F] transition-colors"
+                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/30 text-sm focus:outline-none focus:border-[#7CC8C0] transition-colors"
                       required
                     />
                   </div>
@@ -374,7 +385,7 @@ export default function Index() {
                       placeholder="+7 (___) ___-__-__"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/30 text-sm focus:outline-none focus:border-[#F4A97F] transition-colors"
+                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/30 text-sm focus:outline-none focus:border-[#7CC8C0] transition-colors"
                       required
                     />
                   </div>
@@ -383,28 +394,27 @@ export default function Index() {
                     <select
                       value={formData.age}
                       onChange={(e) => setFormData({ ...formData, age: e.target.value })}
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-[#F4A97F] transition-colors appearance-none"
+                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-[#7CC8C0] transition-colors"
                     >
                       <option value="" className="text-gray-800">Выберите возраст</option>
-                      <option value="1.5-2" className="text-gray-800">1,5–2 года</option>
-                      <option value="2-3" className="text-gray-800">2–3 года</option>
-                      <option value="3-5" className="text-gray-800">3–5 лет</option>
-                      <option value="5-7" className="text-gray-800">5–7 лет</option>
+                      <option value="5-6" className="text-gray-800">5–6 лет</option>
+                      <option value="7-9" className="text-gray-800">7–9 лет</option>
+                      <option value="10-12" className="text-gray-800">10–12 лет</option>
                     </select>
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-[#F4A97F] text-white font-700 py-3.5 rounded-xl hover:bg-[#E8956A] transition-all hover:scale-[1.02] shadow-lg shadow-[#F4A97F]/30 mt-2"
+                    className="w-full bg-[#3DADA3] text-white font-extrabold py-4 rounded-xl hover:bg-[#2D9D93] transition-all hover:scale-[1.02] shadow-lg shadow-[#3DADA3]/30 mt-2"
                   >
-                    Записаться на экскурсию
+                    Забронировать место 🦷
                   </button>
-                  <p className="text-white/40 text-xs text-center">Перезвоним в течение часа</p>
+                  <p className="text-white/40 text-xs text-center">Перезвоним в течение часа для подтверждения</p>
                 </form>
               ) : (
                 <div className="bg-white/10 backdrop-blur rounded-2xl p-10 flex flex-col items-center justify-center text-center min-h-64">
-                  <span className="text-5xl mb-4">☀️</span>
-                  <h3 className="font-700 text-xl mb-2">Заявка принята!</h3>
-                  <p className="text-white/70 text-sm">Мы свяжемся с вами в ближайшее время и согласуем удобное время для визита.</p>
+                  <span className="text-6xl mb-4">🎓</span>
+                  <h3 className="font-bold text-xl mb-2">Место забронировано!</h3>
+                  <p className="text-white/70 text-sm">Мы свяжемся с вами в ближайшее время и пришлём всю информацию о мастер-классе.</p>
                 </div>
               )}
             </div>
@@ -413,21 +423,32 @@ export default function Index() {
       </section>
 
       {/* FOOTER */}
-      <footer className="py-8 border-t border-[#F0E8E0] bg-[#FFFAF7]">
+      <footer className="py-8 border-t border-[#E0F0EE] bg-white">
         <div className="max-w-6xl mx-auto px-5 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <span className="text-xl">☀️</span>
-            <span className="font-700 text-[#3D2C20]">Солнышко</span>
-            <span className="text-[#B09080] text-sm ml-2">© 2024</span>
+            <span className="text-xl">🦷</span>
+            <span className="font-extrabold text-[#1A3A36]">Школа юного стоматолога</span>
+            <span className="text-[#7CC8C0] text-sm ml-2">© 2024</span>
           </div>
-          <div className="flex items-center gap-6 text-sm text-[#B09080]">
-            <a href="#about" className="hover:text-[#F4A97F] transition-colors">О нас</a>
-            <a href="#program" className="hover:text-[#F4A97F] transition-colors">Программа</a>
-            <a href="#reviews" className="hover:text-[#F4A97F] transition-colors">Отзывы</a>
-            <a href="#contact" className="hover:text-[#F4A97F] transition-colors">Контакты</a>
+          <div className="flex items-center gap-6 text-sm text-[#7CC8C0]">
+            <a href="#program" className="hover:text-[#3DADA3] transition-colors">Программа</a>
+            <a href="#reviews" className="hover:text-[#3DADA3] transition-colors">Отзывы</a>
+            <a href="#faq" className="hover:text-[#3DADA3] transition-colors">FAQ</a>
+            <a href="#contact" className="hover:text-[#3DADA3] transition-colors">Контакты</a>
           </div>
         </div>
       </footer>
+
+      <style>{`
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-12px); }
+        }
+      `}</style>
     </div>
   );
 }
